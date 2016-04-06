@@ -59,6 +59,8 @@ mk_get_header_view('global', 'full-screen-search');
 
 <footer id="mk_page_footer">
 <?php
+//<!-- W3TC-include-css -->
+//<!-- W3TC-include-js-head -->
 wp_footer();
 if(isset($mk_options['pagespeed-optimization']) and $mk_options['pagespeed-optimization'] != 'false') {
 ?>
@@ -91,13 +93,5 @@ if(isset($mk_options['pagespeed-optimization']) and $mk_options['pagespeed-optim
 </script>
 <?php } ?>
 </footer>
-
-<?php 
-// Asks W3C Total Cache plugin to move all JS and CSS assets to before body closing tag. It will help getting above 90 grade in google page speed.
-if(isset($mk_options['pagespeed-optimization']) and $mk_options['pagespeed-optimization'] != 'false') {
-    echo "<!-- W3TC-include-js-head -->";
-    echo "<!-- W3TC-include-css -->";
-}
-?>
 </body>
 </html>

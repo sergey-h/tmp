@@ -52,11 +52,11 @@ class Artbees_Widget_News_Feed extends WP_Widget {
 					?>
 					<li>
 					<?php if ( has_post_thumbnail() ) : ?>
-			        <a href="<?php echo get_permalink(); ?>" title="<?php the_title_attribute(); ?>" class="news-widget-thumbnail">
+			        <a href="<?php echo get_permalink(); ?>" title="<?php the_title(); ?>" class="news-widget-thumbnail">
 			        <?php		
 							$image_src_array = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full', true );
 							$image_src = bfi_thumb( $image_src_array[ 0 ], array('width' => 500, 'height' => 250)); 
-						?><img alt="<?php the_title_attribute(); ?>" title="<?php the_title_attribute(); ?>" src="<?php echo $image_src; ?>" />
+						?><img alt="<?php the_title(); ?>" title="<?php the_title(); ?>" src="<?php echo $image_src; ?>" />
 					</a>
 					<?php endif; ?>
 

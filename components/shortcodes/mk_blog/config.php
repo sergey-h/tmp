@@ -1,9 +1,7 @@
 <?php
 extract(shortcode_atts(array(
-     'post_type'              => 'post',
      'style'                  => 'modern',
      'column'                 => 3,
-     'exclude_post_format'    => '',
      'disable_meta'           => 'true',
      'full_content'           => 'false',
      'grid_image_height'      => 350,

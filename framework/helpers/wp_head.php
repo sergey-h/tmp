@@ -75,8 +75,8 @@ if (!function_exists('mk_open_graph_meta')) {
             $output.= '<meta property="og:image" content="' . $image_src_array[0] . '"/>' . "\n";
         }
         $output.= '<meta property="og:url" content="' . get_permalink() . '"/>' . "\n";
-        $output.= '<meta property="og:title" content="' . the_title_attribute(array('echo' => false)) . '"/>' . "\n";
-        $output.= '<meta property="og:description" content="' . esc_attr(get_the_excerpt()) . '"/>' . "\n";
+        $output.= '<meta property="og:title" content="' . esc_attr(strip_tags(get_the_title())) . '"/>' . "\n";
+        $output.= '<meta property="og:description" content="' . esc_attr(strip_tags(get_the_excerpt())) . '"/>' . "\n";
         $output.= '<meta property="og:type" content="article"/>' . "\n";
         echo $output;
     }
@@ -117,6 +117,24 @@ if (!function_exists('mk_apple_touch_icons')) {
     add_action('wp_head', 'mk_apple_touch_icons', 2);
 }
 
+/**
+ * outputs custom fav icons and apple touch icons into head tag
+ */
+if (!function_exists('mk_ie_compatibility_media')) {
+    function mk_ie_compatibility_media() {
+        global $mk_options;
+        
+        echo "\n";
+        echo '<!--[if lt IE 9]>';
+        echo '<script src="' . THEME_JS . '/html5shiv.js" type="text/javascript"></script>' . "\n";
+        echo '<link rel="stylesheet" href="' . THEME_STYLES . '/ie.css" />' . "\n";
+        echo '<![endif]-->' . "\n";
+        echo '<!--[if IE 9]>' . "\n";
+        echo '<script src="' . THEME_JS . '/ie/placeholder.js" type="text/javascript"></script>' . "\n";
+        echo '<![endif]-->' . "\n";
+    }
+    add_action('wp_head', 'mk_ie_compatibility_media', 3);
+}
 
 /**
  * outputs custom fav icons and apple touch icons into head tag
@@ -551,8 +569,6 @@ if (!function_exists('mk_get_header_class')) {
         $toolbar_toggle = !empty($mk_options['theme_toolbar_toggle']) ? $mk_options['theme_toolbar_toggle'] : 'true';
         $sticky_style = !empty($mk_options['header_sticky_style']) ? $mk_options['header_sticky_style'] : 'false';
         $sticky_style_class = ($sticky_style == 'lazy') ? 'sticky-style-fixed' :  'sticky-style-' . $sticky_style;
-        $responsive_burger_align = !empty($mk_options['responsive_burger_align']) ? ('mobile-align-' . $mk_options['responsive_burger_align']) :  'mobile-align-right';
-        
         $sticky_style_class = $is_shortcode ? false : $sticky_style_class;
         
 
@@ -595,7 +611,6 @@ if (!function_exists('mk_get_header_class')) {
         $class[] = $sticky_style_class;
         $class[] = mk_get_bg_cover_class($mk_options['banner_size']);
         $class[] = $header_layout;
-        $class[] = $responsive_burger_align;
         $class[] = isset($el_class) ? $el_class : '';
         
         if ($is_transparent) {

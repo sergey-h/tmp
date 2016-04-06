@@ -94,7 +94,7 @@ else {
 ?>
 
  <span class="gallery-inner">
-    <img alt="<?php echo esc_attr(get_post_meta($post->ID, '_wp_attachment_image_alt', true)); ?>" height="<?php echo $height; ?>" width="<?php echo $image_width; ?>" title="<?php echo the_title_attribute(); ?>" data-image-size="<?php echo $view_params['image_size']; ?>" src="<?php echo $image_output_src; ?>" />
+    <img alt="<?php echo get_post_meta($post->ID, '_wp_attachment_image_alt', true); ?>" height="<?php echo $height; ?>" width="<?php echo $image_width; ?>" title="<?php echo get_the_title(); ?>" data-image-size="<?php echo $view_params['image_size']; ?>" src="<?php echo $image_output_src; ?>" />
  </span>
 
 

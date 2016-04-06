@@ -104,7 +104,7 @@ if (!function_exists('mk_get_control_panel_view')) {
  *
  * @last_update 5.0.8
  */
-function mk_get_template_part($file, $view_params = array() , $cache_args = array()) {  
+function mk_get_template_part($file, $view_params = array() , $cache_args = array()) {
     global $post;
 
     // security check for LFI
@@ -120,7 +120,7 @@ function mk_get_template_part($file, $view_params = array() , $cache_args = arra
     } else if (file_exists(get_template_directory() . '/' . $file . '.php')) {
         $file = get_template_directory() . '/' . $file . '.php';
     } else {
-        echo "Bad method! Code: GP-123! $file file is missing!";
+        echo "Bad method! Code: GP-123";
         die;
     }
 
@@ -985,36 +985,3 @@ if (!function_exists('mk_breadcrumbs_get_parents')) {
         return $parents;
     }
 }
-
-
-
-
-
-/**
- * Gets blog post thumbnail conditionally from blog slideshow type if no featured image is provided.  
- *
- */
-if (!function_exists('mk_get_blog_post_thumbnail')) {
-    function mk_get_blog_post_thumbnail($post_type = 'image') {
-        global $post;
-
-        if($post_type == 'portfolio') {
-
-            if(has_post_thumbnail()) {
-
-                $attachment_id = get_post_thumbnail_id();   
-
-            } else {
-                $attachment_id = get_post_meta($post->ID, '_gallery_images', true);
-                $attachment_id = explode(',', $attachment_id);
-                $attachment_id = $attachment_id[0];
-            }
-        } else {
-            $attachment_id = get_post_thumbnail_id();
-        }
-        
-        return $attachment_id;
-
-    }
-}
-    

@@ -2765,7 +2765,3 @@ you can use the generic selector below, but it's slower:
   color: #878787;
   font-size: 11px;
 }
-.vc_element_label,
-.wpb_element_label {
-  text-transform: capitalize;
-}

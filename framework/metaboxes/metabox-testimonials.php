@@ -32,6 +32,16 @@ array(
 		"type" => "text"
 	),
 	array(
+		"name" => __( "Star Rating", "mk_framework" ),
+		"desc" => __( "", "mk_framework" ),
+		"id" => "_star",
+		"default" => "0",
+        "min" => "0",
+        "max" => "5",
+        "step" => "1",
+        "type" => "range",
+	),
+	array(
 		"name" => __( "Quote", "mk_framework" ),
 		"desc" => __( "Please fill below area with the quote", "mk_framework" ),
 		"id" => "_desc",

@@ -25,8 +25,8 @@ if(method_exists('WPBMap', 'addAllMappedShortcodes')) {
 switch ($view_params['post_type']) {
     case 'image':
         if (has_post_thumbnail()) {
-            echo '<div class="featured-image"><a class="full-cover-link" title="' .  the_title_attribute(array('echo' => false)) . '" href="' . get_permalink() . '">&nbsp</a>';
-            echo '<img alt="' . the_title_attribute(array('echo' => false)) . '" title="' . the_title_attribute(array('echo' => false)) . '" width="'.$image_width.'" height="'.$image_height.'" src="' . $image_output_src  . '" itemprop="image" />';
+            echo '<div class="featured-image"><a class="full-cover-link" title="' . get_the_title() . '" href="' . get_permalink() . '">&nbsp</a>';
+            echo '<img alt="' . get_the_title() . '" title="' . get_the_title() . '" width="'.$image_width.'" height="'.$image_height.'" src="' . $image_output_src  . '" itemprop="image" />';
             echo '<div class="image-hover-overlay"></div>';
             echo '<div class="post-type-badge" href="' . get_permalink() . '"><i class="mk-li-' . $view_params['post_type'] . '"></i></div>';
             echo '</div>';
@@ -48,8 +48,8 @@ switch ($view_params['post_type']) {
             echo '</div>';
         } 
         else {
-            echo '<div class="featured-image"><a class="full-cover-link" title="' . the_title_attribute(array('echo' => false)) . '" href="' . get_permalink() . '">&nbsp</a>';
-            echo '<img alt="' . the_title_attribute(array('echo' => false)) . '" title="' . the_title_attribute(array('echo' => false)) . '" width="'.$image_width.'" height="'.$image_height.'" src="' . $image_output_src . '" itemprop="image" />';
+            echo '<div class="featured-image"><a class="full-cover-link" title="' . get_the_title() . '" href="' . get_permalink() . '">&nbsp</a>';
+            echo '<img alt="' . get_the_title() . '" title="' . get_the_title() . '" width="'.$image_width.'" height="'.$image_height.'" src="' . $image_output_src . '" itemprop="image" />';
             echo '<div class="image-hover-overlay"></div>';
             echo '<div class="post-type-badge" href="' . get_permalink() . '"><i class="mk-li-' . $view_params['post_type'] . '"></i></div>';
             echo '</div>';

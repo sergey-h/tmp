@@ -171,7 +171,6 @@
   line-height: 40px;
   padding-left: 50px;
   position: relative;
-  word-wrap: break-word;
 }
 .mk-blog-classic-item .blog-twitter-content:before {
   content: '';

@@ -51,7 +51,7 @@ if ($view_params['featured'] == 'true') {
                         <div class="item-holder">
 
                                 <a class="mk-lightbox" data-fancybox-group="<?php echo $id; ?>" href="<?php echo get_permalink(); ?>">
-                                    <img alt="<?php the_title_attribute(); ?>" title="<?php the_title_attribute(); ?>" width="<?php echo $image_src_array[1]; ?>" height="<?php echo $image_src_array[2]; ?>" src="<?php echo $image_src_array[0]; ?>" itemprop="image" />
+                                    <img alt="<?php the_title(); ?>" title="<?php the_title(); ?>" width="<?php echo $image_src_array[1]; ?>" height="<?php echo $image_src_array[2]; ?>" src="<?php echo $image_src_array[0]; ?>" itemprop="image" />
 
                                     <i class="mk-jupiter-icon-plus-circle"><span>&nbsp;</span></i>
                                         <span class="image-hover-overlay"></span>

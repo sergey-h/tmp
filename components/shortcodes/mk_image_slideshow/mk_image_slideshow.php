@@ -12,9 +12,23 @@ $images = explode( ',', $images );
 
 require_once (THEME_INCLUDES . "/bfi_thumb.php");
 
+// $slider_atts[] = 'data-animation="'.$effect.'"';
+// $slider_atts[] = 'data-easing="swing"';
+// $slider_atts[] = 'data-direction="horizontal"';
+// $slider_atts[] = 'data-smoothHeight="'.$smooth_height.'"';
+// $slider_atts[] = 'data-animationSpeed="'.$animation_speed.'"';
+// $slider_atts[] = 'data-slideshowSpeed="'.$slideshow_speed.'"';
+$slider_atts[] = 'data-pauseOnHover="'.$pause_on_hover.'"';
+// $slider_atts[] = 'data-controlNav="false"';
+// $slider_atts[] = 'data-directionNav="'.$direction_nav.'"';
+// $slider_atts[] = 'data-isCarousel="true"';
+
+
+
 mk_get_view('global', 'shortcode-heading', false, ['title' => $title]); ?>
 
-<div class="mk-slideshow mk-flexslider mk-slider js-el <?php echo $el_class; ?>"
+
+<div class="mk-slideshow mk-flexslider mk-slider js-el <?php echo $el_class; ?>" <?php // echo implode(' ', $slider_atts); ?> 
 	style="max-width:<?php echo $image_width; ?>px; margin-top:<?php echo $margin_top; ?>px; margin-bottom:<?php echo $margin_bottom; ?>px;"
 	data-mk-component='SwipeSlideshow'
 	data-swipeSlideshow-config='{
@@ -23,7 +37,6 @@ mk_get_view('global', 'shortcode-heading', false, ['title' => $title]); ?>
 		"transitionTime" : "<?php echo $animation_speed ?>",
 		"nav" : "#flex-direction-nav-<?php echo $id ?>",
 		"hasNav" : "<?php echo $direction_nav; ?>",
-		"pauseOnHover" : <?php echo $pause_on_hover; ?>,
 		"fluidHeight" :  <?php echo $smooth_height; ?>}' >
 
 	<div class="mk-swiper-wrapper mk-slider-holder">
@@ -38,10 +51,12 @@ mk_get_view('global', 'shortcode-heading', false, ['title' => $title]); ?>
 
 		<?php } ?>
 
+
 		<!-- empty PNG to stretch slider and make it responsive outside of js as the slider adjusts height and width to container sizes  -->
 		<img src="<?php echo mk_image_generator('', $image_width, $image_height) ; ?>"  style="visibility: hidden;" />
 
 	</div>
+
 
 	<?php if( $direction_nav == 'true' ) { ?>
 	<ul id="flex-direction-nav-<?php echo $id; ?>" class="flex-direction-nav">

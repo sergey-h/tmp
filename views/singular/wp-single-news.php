@@ -17,7 +17,7 @@ if (is_array($terms)) {
 <div class="news-post-heading">
     <ul class="news-single-social">
         <li><a onClick="window.print()" href="#"><?php _e('Print', 'mk_framework'); ?></a></li>
-        <li><a href="mailto:info@company.com?subject=<?php the_title_attribute(); ?>&body=<?php echo esc_attr(get_the_excerpt()); ?>"><?php _e('Email', 'mk_framework'); ?></a></li>
+        <li><a href="mailto:info@company.com?subject=<?php the_title(); ?>&body=<?php the_excerpt(); ?>"><?php _e('Email', 'mk_framework'); ?></a></li>
     </ul>
     <div class="single-news-meta">
         <div class="news-single-categories"><?php echo implode(', ', $terms_name); ?></div>

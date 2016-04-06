@@ -46,11 +46,7 @@
 	$first_el_class = $i == 1 ? 'mk-blog-first-el' : '';
 
 	$output .= '<li class="'.$first_el_class.'">';
-	$output .= '<div class="mk-blog-showcase-thumb">
-					<div class="showcase-blog-overlay"></div>
-						<a href="'.get_permalink().'"><i class="mk-jupiter-icon-plus-circle"></i></a>
-						<img src="'.mk_image_generator($image_src, 260, 180).'" alt="'.the_title_attribute(array('echo' => false)).'" title="'.the_title_attribute(array('echo' => false)).'" />
-					</div>';
+	$output .= '<div class="mk-blog-showcase-thumb"><div class="showcase-blog-overlay"></div><a href="'.get_permalink().'"><i class="mk-jupiter-icon-plus-circle"></i></a><img src="'.mk_image_generator($image_src, 260, 180).'" alt="'.get_the_title().'" title="'.get_the_title().'" /></div>';
 	$output .= '<div class="blog-showcase-extra-info">';
 	$output .='<time datetime="'.get_the_date('Y-m-d').'">';
 	$output .='<a href="'.get_month_link( get_the_time( "Y" ), get_the_time( "m" ) ).'">'.get_the_date().'</a>';

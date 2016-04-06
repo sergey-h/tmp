@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html <?php echo language_attributes();?> >
 <head>
-<meta name="alexaVerifyID" content="wj1SK8mkaOcRTvbm61h-tiDSBaU"/>
-<meta name="msvalidate.01" content="EF247A9C58722E24F8647D03E98BEB37" />
-<meta name="google-site-verification" content="oomLgVuUZfUTw4_RWLW9-gYj98ZgAR9OzFbUgUMujX4" /> 
-<meta name="keywords" content="ECommerce Website Design, Website and UI Designs , E-Commerce Design and Development , Web Design and Development, Web Development Services, , Web E-Commerce Services, , E-Commerce Website Development, , Magento Development Services, WordPress and Plugin Developers."/>
     <?php wp_head(); ?>
 </head>
 

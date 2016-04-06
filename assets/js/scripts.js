@@ -182,10 +182,6 @@ window.MK = MK;
     window.addEventListener("load", function() {
       if (elementQuery.autoInit) {
         elementQuery.init();
-        setTimeout(function() {
-          elementQuery.evaluateQueries();
-          console.log('Element Queries evaluated');
-        }, 1000);
       }
     });
 
@@ -1621,8 +1617,6 @@ window.matchMedia || (window.matchMedia = function() {
 (function($) {
 	'use strict';
 
-	var MK = window.MK || {};
-
 	/**
 	 * MK.core holds most important methods that bootstraps whole application
 	 * 
@@ -1731,11 +1725,10 @@ window.matchMedia || (window.matchMedia = function() {
             }
         });
 
-        // The dependency is not new but it's not resolved yet
+        // The dependency is not new but it's not resolved either
         // Callback is added to queue that will be run after the script is loaded
         // Don't run callback just yet.
         if( newDeps[0] === true ) {
-        	// console.log('Waiting for ' + dependencies[0]);
         	return;
         }
 
@@ -1765,7 +1758,7 @@ window.matchMedia || (window.matchMedia = function() {
         	});
         };
 
-        // Run callbacks when promise is resolved
+        // Run callback when promise is resolved
         $.when.apply( null, queue ).done( onLoad );
 	};
 
@@ -1783,7 +1776,6 @@ window.matchMedia || (window.matchMedia = function() {
 (function($) {
 	'use strict';
 
-    var MK = window.MK || {};
 	MK.utils = window.MK.utils || {};
 
     /**
@@ -1804,7 +1796,6 @@ window.matchMedia || (window.matchMedia = function() {
 (function($) {
 	'use strict';
 
-    var MK = window.MK || {};
 	MK.utils = window.MK.utils || {};
 
     /**
@@ -1922,39 +1913,10 @@ window.matchMedia || (window.matchMedia = function() {
         return window.matchMedia( '(max-width: '+ mk_responsive_nav_width +'px)').matches;
     };
 
-
-
-    MK.utils.getUrlParameter = function getUrlParameter(sParam) {
-        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-            sURLVariables = sPageURL.split('&'),
-            sParameterName,
-            i;
-
-        for (i = 0; i < sURLVariables.length; i++) {
-            sParameterName = sURLVariables[i].split('=');
-
-            if (sParameterName[0] === sParam) {
-                return sParameterName[1] === undefined ? true : sParameterName[1];
-            }
-        }
-    };
-
-
-    MK.utils.isSmoothScroll = (function() {
-        var isSafari = (MK.utils.browser.name === "Safari");
-        var isUserChoice = (mk_smooth_scroll === 'true');
-
-        // We notify our app about smooth scroll option when user choose it from admin panel and current browser is not safari.
-        // Safari has waterfall of events that will block our event loop and make page unresponsive. 
-        // It's better to strip it from effects rather than keep it not usable
-        return isUserChoice && !isSafari;
-    }());
-
 }(jQuery));
 (function($) {
 	'use strict';
 
-    var MK = window.MK || {};
 	MK.utils = window.MK.utils || {};
 
 	/**
@@ -1999,7 +1961,6 @@ window.matchMedia || (window.matchMedia = function() {
 (function($) {
 	'use strict';
 
-    var MK = window.MK || {};
 	MK.utils = window.MK.utils || {};
 
 	/**
@@ -2035,7 +1996,6 @@ window.matchMedia || (window.matchMedia = function() {
 (function($) {
 	'use strict';
 
-    var MK = window.MK || {};
 	MK.utils = window.MK.utils || {};
 
 	MK.utils.misc = {};
@@ -2102,7 +2062,6 @@ window.matchMedia || (window.matchMedia = function() {
 (function($) {
 	'use strict';
 
-    var MK = window.MK || {};
 	MK.utils = window.MK.utils || {};
 
 	/**
@@ -2306,32 +2265,6 @@ window.matchMedia || (window.matchMedia = function() {
 	};
 
 }(jQuery));
-(function($) {
-    'use strict';
-
-    // Create delagation event handler to behave as "live" listener. We may provide new elements with ajax etc later
-    // Just add js-taphover class whatever element you'd like to immidietely bring hover on touch devices
-    $("body").on("touchstart", '.js-taphover', function (e) {
-        var $link = $(e.currentTarget); // grab target
-
-        // Rather than ":hover" state we operate on ".hover" class which gives us more control and chance to emulate it on touchstart
-        // yet it is easy to reason about in our CSS
-        if ($link.hasClass('hover')) {
-            return true;
-        } else {
-            $link.addClass('hover');
-            $('.js-taphover').not(e.currentTarget).removeClass('hover'); // remove it from previous element
-            e.stopPropagation(); // do not leak to document root if expected element was touched
-            return false; //extra, and to make sure the function has consistent return points
-        }
-    });
-
-    // Whenever touchstart leaks to the root romve all hover classes
-    $(document).on("touchstart", function(e) {
-        $('.js-taphover').removeClass('hover');
-    });
-
-}(jQuery));
 // (function() {
 //     'use strict';
 
@@ -2436,8 +2369,6 @@ window.matchMedia || (window.matchMedia = function() {
 (function($) {
 	'use strict';
 
-    var MK = window.MK || {};
-    
 	/**
 	 * 	MK.val is collection of Lambdas responsible for returning up to date values of method type like scrollY or el offset.
 	 * 	The Lambda is responsible for keeping track of value of a particular property, usually takes as argument an object 
@@ -2537,7 +2468,10 @@ window.matchMedia || (window.matchMedia = function() {
                                                                   'percent';
 
         var stickyOffset = 0;
-        var setOffset = function() {			
+        var setOffset = function() {
+
+			// headerHeight = (isVertical) ? 0 : config.height;
+			
 	        if( type === 'number' ) {
 	        	stickyOffset = config.stickyOffset;
 	        }
@@ -5085,24 +5019,17 @@ $(document).ready(function() {
         mk_gallery();
         mk_edge_fullpage_pagination();
         mk_theatre_responsive_calculator();
+        mk_mobile_tablet_responsive_calculator();
         mk_tabs_responsive();
         mk_start_tour_resize();
         mk_header_social_resize();
         mk_page_section_social_video_bg();
         loop_audio_init();
-                        
-        setTimeout(function() {
-            /* 
-                Somehow the values are not correctly updated for the screens
-                and we need to put setTimeout to fix the issue
-            */
-            mk_mobile_tablet_responsive_calculator();
-        }, 300);
-        
+        // for regression testing
         console.log("ready for rock");
     });
 
- 
+
     var onDebouncedResize = function() {
         mk_theatre_responsive_calculator();
         mk_mobile_tablet_responsive_calculator();
@@ -5673,19 +5600,14 @@ function mk_portfolio_ajax() {
   }
 
   function init() {
-    // wait for ajax response propagation and insertion
-    setTimeout(function() {
-      $('.portfolio-grid.portfolio-ajax-enabled').each( function() {
-        $( this ).ajaxPortfolio({
-          extraOffset: headerHeight
-        });
+    $('.portfolio-grid.portfolio-ajax-enabled').each( function() {
+      $( this ).ajaxPortfolio({
+        extraOffset: headerHeight
       });
-    }, 100);
+    });
   }
 
   MK.core.loadDependencies([ MK.core.path.plugins + 'jquery.ajax.portfolio.js' ], init);
-  // Reinit when ajax loaded stuff
-  MK.utils.eventManager.subscribe('ajaxLoaded', init);
 }
 
 /* Ajax Search */
@@ -5706,9 +5628,7 @@ function mk_ajax_search() {
         $(this).parent('form').addClass('ajax-searching');
       },
       source: function (req, response) {
-        var query_spliter = (ajaxurl.indexOf('?') > -1) ? '&' : '?';
-
-        $.getJSON(ajaxurl + query_spliter + 'callback=?&action=mk_ajax_search&security='+security+'&_wp_http_referer='+_wp_http_referer, req, response);
+        $.getJSON(ajaxurl + '?callback=?&action=mk_ajax_search&security='+security+'&_wp_http_referer='+_wp_http_referer, req, response);
       },
       select: function (event, ui) {
         window.location.href = ui.item.link;
@@ -5846,8 +5766,6 @@ function mk_contact_form() {
             var $input = $this.find( 'input, textarea' );
             var activeClass = 'is-active';
 
-            $input.filter('[type=email]').attr('type', 'emailModern');
-
             var setActive = function () {
               $( this ).parent().addClass( activeClass );
             };
@@ -5894,14 +5812,12 @@ function mk_contact_form() {
             e.preventDefault();
             changeCaptcha();
         });
-  
 
-        // Update regex to allow new top level domains but first update type to avoid old regex validation forced by plugin
-        // https://github.com/jquerytools/jquerytools/issues/1089
-        $('.mk-contact-form').find('[type=email]').attr('type', 'emailModern');
-        $.tools.validator.fn('[type=emailModern]', 'Please supply a valid email address for me', function(input, value) {
-          return /^([a-z0-9_\.\-\+]+)@([\da-z\.\-]+)\.([a-z\.]{2,63})$/i.test(value);
-        });
+        // $(".captcha-form").each(function() {
+        //   $(this).on("focus", function() {
+        //     $(this).attr("placeholder", mk_captcha_placeholder).removeClass('contact-captcha-invalid contact-captcha-valid');
+        //   });
+        // })
 
         var changeCaptcha = function() {
             $(".captcha-image").attr("src", mk_theme_dir + "/captcha/captcha.php?"+Math.random()); 
@@ -5925,7 +5841,6 @@ function mk_contact_form() {
           effect: 'contact_form'
         }).submit(function(e) {
           var form = $(this);
-          var captcha_text = form.find(".captcha-form").attr('data-placeholder');
           if (!e.isDefaultPrevented()) {
 
             var data = {
@@ -5935,11 +5850,12 @@ function mk_contact_form() {
               p_id : form.find('input[name="p_id"]').val(),
               sh_id: form.find('input[name="sh_id"]').val(),
               name: form.find('input[name="contact_name"]').val(),
+              name2: form.find('input[name="contact_name2"]').val(),
               last_name: form.find('input[name="contact_last_name"]').val(),
               phone: form.find('input[name="contact_phone"]').val(),
               email: form.find('input[name="contact_email"]').val(),
               website: form.find('input[name="contact_website"]').val(),
-              content: form.find('textarea[name="contact_content"]').val()
+              content: form.find('textarea[name="contact_content"]').val(),
             };
 
             sendForm = function() {
@@ -5948,7 +5864,6 @@ function mk_contact_form() {
                 form.find('.mk-contact-loading').fadeOut('slow');
                 form.find('.text-input').val('');
                 form.find('textarea').val('');
-                form.find('.captcha-form').removeClass('contact-captcha-valid contact-captcha-invalid').attr('placeholder', captcha_text);
                 progressButton.success(form);
               });
             }; 
@@ -6393,10 +6308,10 @@ function mk_hover_events() {
 function mk_unfold_footer() {
   var $this = $('#mk-footer'),
       $spacer = $('#mk-footer-unfold-spacer'),
-      $footerHeight = $this.outerHeight();
+      $footerHeight = $this.outerHeight(),
+      $winWidth = $(window).outerWidth();
 
-  // Stick with CSS media query breakpoint to target exact screen width
-  if( !window.matchMedia("(max-width: 767px)").matches ) {
+  if ($winWidth > 767) {
       if ($this.hasClass('mk-footer-unfold')) {
         $spacer.css('height', $footerHeight);
       }
@@ -6792,23 +6707,20 @@ function product_loop_add_cart() {
 	'use strict';
 
     $('.mk-fullscreen-nav-close, .mk-fullscreen-nav-wrapper, #fullscreen-navigation a').on('click', function(e) {
+	    e.preventDefault();
 
-    	// Close nav with removing classes
 	    $('.mk-fullscreen-nav').removeClass('opened');
 	    $('.mk-dashboard-trigger').removeClass('fullscreen-active');
 	    $('body').removeClass('fullscreen-nav-opened'); 
 
+
 		var anchor = MK.utils.detectAnchor( this ),
 	        $this = $( this );
 
-	    // Scroll to anchor if exists
 		if( anchor.length ) {
 			e.preventDefault();
 			MK.utils.scrollToAnchor( anchor );
 
-		// Or do nothing if pointless # as href
-		// BAD  PRACTICE: it is very popular to use "#" for click elements that we listen to with js.
-		// GOOD PRACTICE: prefer "javascript:;" as easier to handle and more readable version
 		} else if( $this.attr( 'href' ) === '#' ) {
 	        e.preventDefault();
 	    }
@@ -6881,30 +6793,15 @@ function product_loop_add_cart() {
 	var $window = $(window);
 	var $body = $('body');
     var $resMenuWrap = $('.mk-responsive-wrap');
+    var hasResMenu = ($resMenuWrap.length > 0);
+
+    if(!hasResMenu) return;
+
     var $post_nav = $('.mk-post-nav');
     var $toolbar = $('.mk-header-toolbar');
     var $resMenuLink = $('.mk-nav-responsive-link');
 
-    // Flags
-    var hasResMenu = ($resMenuWrap.length > 0);
 
-    // We keep this handler above hasResMenu flag.
-    // Even if our header doesn't contain droppable responsive menu (in favor of fullscreen or side menu) 
-    // we still transform tollbar into collapsible menu part in responsive state
-    $('.mk-toolbar-resposnive-icon').on('click',function(e) {
-        e.preventDefault();
-        console.log('clicked');
-        if ($body.hasClass('toolbar-opened')) {
-            $body.removeClass('toolbar-opened').addClass('toolbar-closed');
-            $toolbar.hide();
-        } else {
-            $body.removeClass('toolbar-closed').addClass('toolbar-opened');
-            $toolbar.show();
-        }
-    });
-
-
-    if(!hasResMenu) return;
 
     function toggleResMenu(e) {
         e.preventDefault();
@@ -6932,6 +6829,19 @@ function product_loop_add_cart() {
 	$resMenuLink.each(function() {
         $(this).on('click', toggleResMenu);
     });
+
+
+    $('.mk-toolbar-resposnive-icon').on('click',function(e) {
+        e.preventDefault();
+        if ($body.hasClass('toolbar-opened')) {
+            $body.removeClass('toolbar-opened').addClass('toolbar-closed');
+            $toolbar.hide();
+        } else {
+            $body.removeClass('toolbar-closed').addClass('toolbar-opened');
+            $toolbar.show();
+        }
+    });
+
 
     /*$('.mk-nav-arrow').stop(true).on('click', function(e) {
         // Prevent any unexpected behaviour here
@@ -7375,16 +7285,11 @@ function product_loop_add_cart() {
 			winH = null,
 			height = null,
 			update_count = 0,
-			testing = MK.utils.getUrlParameter('testing'),
+			testing = getUrlParameter('testing'),
 			offset = null;
-
-		// We need to provide height on the same specificity level for workaround to IE bug
-		// connect.microsoft.com/IE/feedback/details/802625/min-height-and-flexbox-flex-direction-column-dont-work-together-in-ie-10-11-preview
-		// stackoverflow.com/questions/19371626/flexbox-not-centering-vertically-in-ie
-		if(MK.utils.browser.name === ('IE' || 'Edge')) $this.css( 'height', '1px' );
-
 		var update = function() {
-			if(update_count === 0) {
+
+			if(update_count == 0) {
 				winH = $window.height();
 				offset = $this.offset().top;
 				height = winH - val.offsetHeaderHeight( offset );
@@ -7411,7 +7316,20 @@ function product_loop_add_cart() {
 
 })( jQuery );
 
+var getUrlParameter = function getUrlParameter(sParam) {
+	var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+		sURLVariables = sPageURL.split('&'),
+		sParameterName,
+		i;
 
+	for (i = 0; i < sURLVariables.length; i++) {
+		sParameterName = sURLVariables[i].split('=');
+
+		if (sParameterName[0] === sParam) {
+			return sParameterName[1] === undefined ? true : sParameterName[1];
+		}
+	}
+};
 (function( $ ) {
 	'use strict';
 
@@ -7654,25 +7572,16 @@ function product_loop_add_cart() {
     MK.component.Grid = function( el ) {
     	var $container = $(el);
     	var config = $container.data( 'grid-config' );
-        var isSlideshow = $container.closest('[data-mk-component="SwipeSlideshow"]').length;
 
         var init = function init(){
-            // Flags for cancelling usage goes first :
-                // Quit early if we discover that Grid is used inside SwipeSlideshow as it brings bug with crossoverriding positioning 
-                // + grid is not really needed as we have single row all handled by slider.
-                // It happens only in woocommerce carousel as of hardcoded Grid in loop-start.php
-                if(isSlideshow) return; 
-		        MK.core.loadDependencies([ MK.core.path.plugins + 'minigrid.js' ], create);
+			MK.core.loadDependencies([ MK.core.path.plugins + 'minigrid.js' ], create);
         };
 
         // // Remove el hidden without adding proper class
         var removeOddlyHidden = function removeOddlyHidden() {
             var $item = $(this);
             var isHidden = ($item.css('display') === 'none');
-            if(isHidden) {
-                console.log('removed by grid component: ', this);
-                $item.remove();
-            }
+            if(isHidden) $item.remove();
         };
 
         var create = function create() {
@@ -7681,7 +7590,7 @@ function product_loop_add_cart() {
                 var selector = (typeof item === 'string') ? item : config.item;
 
                 // Prevent plugin breaking when feeding it with hidden elements
-                var $items = $container.find(selector);
+                var $items = $(selector);
                 $items.each( removeOddlyHidden );
 
 	            minigrid({
@@ -7836,15 +7745,9 @@ function product_loop_add_cart() {
 (function($) {
 	'use strict';
 
-	// Check if it's inside hidden parent
-	// Cannot be position: fixed
-	function isHidden(el) {
-	    return (el.offsetParent === null);
-	}
-
 	MK.component.Masonry = function(el) {
-		var $window = $(window);
 		var $container = $(el);
+		var $window = $(window);
 		var config = $container.data( 'masonry-config' );
 		var $masonryItems = $container.find(config.item);
 		var cols = config.cols || 8;
@@ -7864,9 +7767,6 @@ function product_loop_add_cart() {
         };
 
 	    var masonry = function masonry() {
-	    	// Quit for hidden elements for now.
-	    	if(isHidden(el)) return;
-
 	    	var newCols;
 	    	if(window.matchMedia( '(max-width:600px)' ).matches) newCols = 2;
 	    	else if(window.matchMedia( '(max-width:850px)' ).matches) newCols = 4;
@@ -8174,14 +8074,12 @@ function product_loop_add_cart() {
         	if( config.speed <= 1 && config.speed > 0 ) {
         		if( offset === 0 ) {
 	        		$this.css({
-	        			backgroundAttachment: 'scroll',
-	        			'will-change': 'transform'
+	        			backgroundAttachment: 'scroll'
 	        		});
         		} else {
 	        		$this.css({
 						height : h + ( (winH - h) * config.speed ),
-	        			backgroundAttachment: 'scroll',
-	        			'will-change': 'transform' 
+	        			backgroundAttachment: 'scroll'
 	        		}); 
 	        	}
 
@@ -8190,8 +8088,7 @@ function product_loop_add_cart() {
         			// good for full heights - 2 because it's viewable by 2 screen heights
         			height: ( winH  +  ( ( winH * config.speed ) - winH ) * 2 ),  
         			top: -( ( winH * config.speed ) - winH ),
-        			backgroundAttachment: 'scroll',
-        			'will-change': 'transform'
+        			backgroundAttachment: 'scroll'
         		}); 
 
         	} else if ( config.speed > 1 && h > winH ) {
@@ -8201,8 +8098,7 @@ function product_loop_add_cart() {
         		$this.css({
         			height: height,
         			top: -( height - (winH * config.speed) ),
-        			backgroundAttachment: 'scroll',
-        			'will-change': 'transform'
+        			backgroundAttachment: 'scroll'
         		}); 
 
         	} else if ( config.speed < 0 && h >= winH ) {
@@ -8210,8 +8106,7 @@ function product_loop_add_cart() {
         		$this.css({
 					height: height + (height - h),
         			top: h - height,
-        			backgroundAttachment: 'scroll',
-        			'will-change': 'transform'
+        			backgroundAttachment: 'scroll'
         		});   
 
         	} else if ( config.speed < 0 && h < winH ) {
@@ -8221,8 +8116,7 @@ function product_loop_add_cart() {
         		$this.css({
 					height: h + (height * 2),
         			top: -height,
-        			backgroundAttachment: 'scroll',
-        			'will-change': 'transform'
+        			backgroundAttachment: 'scroll'
         		});         		
         	}
         };
@@ -8269,7 +8163,7 @@ function product_loop_add_cart() {
 
 		var init = function() { 
 			// Disable scroll effects when smooth scroll is disabled
-			if( !MK.utils.isSmoothScroll ) { return; }
+			if( mk_smooth_scroll === 'false' ) { return; }
 
 			update();
 			setTimeout(update, 100);
@@ -8421,7 +8315,6 @@ function product_loop_add_cart() {
                 paginationEl 		: '#pagination',
                 draggable           : true,
                 fluidHeight 		: false,
-                pauseOnHover		: false,
                 activeClass 		: 'is-active',
                 onInitialize 		: function() {},
                 onAfterSlide 		: function( id ) {},
@@ -8445,7 +8338,6 @@ function product_loop_add_cart() {
 		this.activeTimer = null;
 		this.autoplay = null;
 		this.timer = null;
-		this.timerRemaining = parseInt(this.config.displayTime);
 	};
 
 	
@@ -8514,10 +8406,6 @@ function product_loop_add_cart() {
 			if( this.config.autoplay ) {
 				$window.on( 'focus', this.windowActive.bind( this ) );
 				$window.on( 'blur', this.windowInactive.bind( this ) );
-			}
-			if( this.config.pauseOnHover ) {
-				$(this.container).on( 'mouseleave', this.setTimer.bind( this ) );
-				$(this.container).on( 'mouseenter', this.unsetTimer.bind( this ) );
 			}
 			if( this.config.fluidHeight === 'toHighest' ) {
 				$window.on( 'resize', this.setHeightToHighest.bind( this ) );
@@ -8616,19 +8504,19 @@ function product_loop_add_cart() {
 			this.timeline.play();
 
 			this.setActive( id );
-			if( this.config.fluidHeight ) { this.setHeight( id ); } 
+			if( this.config.fluidHeight ) { this.setHeight( id ); }
 		},
 
 
 		windowActive : function() {
-			this.setTimer(false, true);
-			$(this.container).removeClass('is-paused'); 
+			this.setTimer();
+			// console.log('active');
 		},
 
 
 		windowInactive : function() {
 			this.unsetTimer();
-			$(this.container).addClass('is-paused');
+			// console.log('inactive');
 		},
 
 
@@ -8758,11 +8646,11 @@ function product_loop_add_cart() {
         setHeightToHighest : function() {
         	// this is becouse of alliginig woocommrece carousel. Too much DOM
         	// Refactor someday
-			var $slides = $( this.slides ),
+			var $slides = $( this.slides ).find('.item-holder'),
 				height = 0;
 
         	$slides.each(function() {
-        		height = Math.max(height, $(this).find('> div').outerHeight());
+        		height = Math.max(height, $(this).height());
         	});
 
         	$( this.container ).height( height ); 
@@ -8892,7 +8780,7 @@ function product_loop_add_cart() {
 					// if we run all loops reset back the default value
 					if( !loops ) {
 						loops = 1;
-						self.timerRemaining = parseInt(self.config.displayTime);
+
 						self.config.onAfterSlide( self.state.id );
 					}
 
@@ -9053,7 +8941,7 @@ function product_loop_add_cart() {
 
 
 		
-		setTimer : function( isFirst, isPaused ) {
+		setTimer : function( isFirst ) {
 			var self  = this,
 				interval = parseInt( this.config.displayTime ),
 				trans = parseInt( this.config.transitionTime ),
@@ -9062,7 +8950,7 @@ function product_loop_add_cart() {
 				create, run;
 
 			this.timer = true;
-			this.lastSetTimer = Date.now();
+			// console.log('set', this.timer);
 
 			create = function() {	
 				// console.log( 'autorun' );
@@ -9076,26 +8964,21 @@ function product_loop_add_cart() {
 				self.setActive( self.nextId( 1 ) );
 				if( self.config.fluidHeight ) { self.setHeight( self.nextId( 1 ) ); }
 				first = false;
-				self.lastSetTimer = Date.now();
 				run();
 			};
 
-			run = function(interval) {
-				var time = interval || timer;
-				self.autoplay = setTimeout( create, time );
+			run = function() {
+				// console.log('run');
+				// console.log( first, first ? interval : timer );
+				self.autoplay = setTimeout( create, timer );
 			};
 
-			if(isPaused) {
-				run(this.timerRemaining);
-			}
-			else run();
+			run();
 		},
 
 
 		unsetTimer : function() {
 			this.timer = false;
-			this.lastUnsetTimer = Date.now();
-			this.timerRemaining -= this.lastUnsetTimer - this.lastSetTimer;
 			if( this.autoplay ) { clearTimeout( this.autoplay ); }
 		},
 
@@ -9814,15 +9697,12 @@ function mk_tabs_responsive(){
   }
 
   function assignToggle() {
-    // wait for ajax response propagation and insertion
-    setTimeout(function() {
-      $('.mk-toggle-trigger').off('click', toggle);
-      $('.mk-toggle-trigger').on('click', toggle);
-    }, 100);
+    $('.mk-toggle-trigger').off('click', toggle);
+    $('.mk-toggle-trigger').on('click', toggle);
   }
 
   assignToggle();
-  MK.utils.eventManager.subscribe('ajaxLoaded', assignToggle);
+  MK.utils.eventManager.subscribe('post-addition', assignToggle);
   MK.utils.eventManager.subscribe('ajax-preview', assignToggle);
 
 }(jQuery));
@@ -9900,41 +9780,32 @@ function mk_tabs_responsive(){
 	}
 
 }(jQuery));
-(function($) {
-    'use strict';
+/**
+ * Entry point of application. Runs all components
+ */
+$( window ).on( 'load', function() {
+    MK.core.initAll( document );
+    MK.utils.scrollToURLHash();
+    // TODO move preloader to components and manage it state from within
+    setTimeout( function() { 
+        MK.ui.preloader.hide(); // site wide 
+        $('.mk-preloader').hide(); // components
+        $('body').removeClass('loading');
+    }, 150 ); 
+});
 
-    /**
-     * Entry point of application. Runs all components
-     */
-    $( window ).on( 'load', function() {
-        var MK = window.MK || {};
-        MK.core.initAll( document );
-        MK.utils.scrollToURLHash();
-        // TODO move preloader to components and manage it state from within
-        setTimeout( function() { 
-            MK.ui.preloader.hide(); // site wide 
-            $('.mk-preloader').hide(); // components
-            $('body').removeClass('loading');
-        }, 150 ); 
-    });
+/**
+ * Assign global click handlers
+ */
+$( document ).on( 'click', '.js-smooth-scroll, .js-main-nav a', function( evt ) {
+	var anchor = MK.utils.detectAnchor( this ),
+        $this = $( this );
 
-    /**
-     * Assign global click handlers
-     */
-    $( document ).on( 'click', '.js-smooth-scroll, .js-main-nav a', smoothScrollToAnchor);
-    $( '.side_dashboard_menu a' ).on( 'click', smoothScrollToAnchor);
+	if( anchor.length ) {
+		evt.preventDefault();
+		MK.utils.scrollToAnchor( anchor );
 
-    function smoothScrollToAnchor( evt ) {
-        var MK = window.MK || {};
-        var anchor = MK.utils.detectAnchor( this );
-
-        if( anchor.length ) {
-            evt.preventDefault();
-            MK.utils.scrollToAnchor( anchor );
-
-        } else if( $this.attr( 'href' ) === '#' ) {
-            evt.preventDefault();
-        }
+	} else if( $this.attr( 'href' ) === '#' ) {
+        evt.preventDefault();
     }
-    
-}(jQuery));}(jQuery))
+});}(jQuery))

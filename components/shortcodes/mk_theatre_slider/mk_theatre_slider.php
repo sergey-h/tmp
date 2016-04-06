@@ -66,8 +66,6 @@ Mk_Static_Files::addCSS("
 
 	#theatre-slider-{$id}{
 		{$margin_bottom}
-	}
-	#theatre-slider-{$id} > div{
 		{$max_width}
 	}
  "

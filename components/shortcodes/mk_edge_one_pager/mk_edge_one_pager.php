@@ -50,10 +50,8 @@ while ($r->have_posts()):
 
     $btn_1_txt = get_post_meta($post->ID, '_btn_1_txt', true);
     $btn_1_url = get_post_meta($post->ID, '_btn_1_url', true);
-    $btn_1_target =  get_post_meta( $post->ID, '_btn_1_target', true );
     $btn_2_txt = get_post_meta($post->ID, '_btn_2_txt', true);
     $btn_2_url = get_post_meta($post->ID, '_btn_2_url', true);
-    $btn_2_target =  get_post_meta( $post->ID, '_btn_2_target', true );
 
     $caption_skin = get_post_meta($post->ID, '_caption_skin', true);
 
@@ -120,9 +118,8 @@ if ( $btn_2_style == 'outline' ) {
 
     $bg_image_css = ($type == 'image') ? ' style="background-image:url(' . $slide_image . '); background-color:' . $slide_bg_color . '" ' : '';
 
-    $sanitised_attr_title = str_replace(' ', '-', the_title_attribute(array('echo' => false)));
 
-    $output .= '<section id="edge-entry-'.get_the_id().'" class="section one-pager-slide ' . $caption_align . ' ' . mk_get_bg_cover_class($cover_bg) . '"' . $bg_image_css . ' data-title="'.$sanitised_attr_title.'" data-header-skin="' . $header_skin . '">';
+    $output .= '<section id="edge-entry-'.get_the_id().'" class="section one-pager-slide ' . $caption_align . ' ' . mk_get_bg_cover_class($cover_bg) . '"' . $bg_image_css . ' data-title="'.str_replace(' ', '-', get_the_title()).'" data-header-skin="' . $header_skin . '">';
 
 
 
@@ -176,7 +173,7 @@ if ( $btn_2_style == 'outline' ) {
         $btn1_atts[] = 'corner_style="'.$btn_1_corner_style.'"';
         $btn1_atts[] = 'size="large"';
         $btn1_atts[] = 'url="'.$btn_1_url.'"';
-        $btn1_atts[] = 'target="'.$btn_1_target.'"';
+        $btn1_atts[] = 'target="_self"';
         $btn1_atts[] = 'align="none"';
         $btn1_atts[] = 'margin_top="0"';
         $btn1_atts[] = 'margin_bottom="0"';
@@ -205,7 +202,7 @@ if ( $btn_2_style == 'outline' ) {
         $btn2_atts[] = 'corner_style="'.$btn_2_corner_style.'"';
         $btn2_atts[] = 'size="large"';
         $btn2_atts[] = 'url="'.$btn_2_url.'"';
-        $btn2_atts[] = 'target="'.$btn_2_target.'"';
+        $btn2_atts[] = 'target="_self"';
         $btn2_atts[] = 'align="none"';
         $btn2_atts[] = 'margin_top="0"';
         $btn2_atts[] = 'margin_bottom="0"';

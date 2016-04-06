@@ -70,6 +70,24 @@
                 "description" => __("", "mk_framework")
             ),
             array(
+                "heading" => __("Order", 'mk_framework'),
+                "description" => __("Designates the ascending or descending order of the 'orderby' parameter.", 'mk_framework'),
+                "param_name" => "order",
+                "value" => array(
+                    __("DESC (descending order)", 'mk_framework') => "DESC",
+                    __("ASC (ascending order)", 'mk_framework') => "ASC"
+
+                ),
+                "type" => "dropdown"
+            ),
+            array(
+                "heading" => __("Orderby", 'mk_framework'),
+                "description" => __("Sort retrieved pricing items by parameter.", 'mk_framework'),
+                "param_name" => "orderby",
+                "value" => $mk_orderby,
+                "type" => "dropdown"
+            ),
+            array(
                 "type" => "textfield",
                 "heading" => __("Extra class name", "mk_framework"),
                 "param_name" => "el_class",

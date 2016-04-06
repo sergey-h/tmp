@@ -28,55 +28,16 @@ $blog_section[] = array(
             ) ,
             "type" => "dropdown"
         ) ,
-
-        array(
-            "name" => __("Make Featured Image Full Height", "mk_framework") ,
-            "desc" => __("If disabled you may set a custom height from below option.", "mk_framework") ,
-            "id" => "single_bold_hero_full_height",
-            "default" => "true",
-            "type" => "toggle",
-            "dependency" => array(
-                   'element' => "single_blog_style",
-                   'value' => array(
-                       'bold'
-                   )
-            ),
-        ) ,
-
         array(
             "name" => __("Featured Image Height", "mk_framework") ,
-            "desc" => __("Clear & Bold style hero image height.", "mk_framework") ,
-            "id" => "bold_single_hero_height",
-            "min" => "100",
-            "max" => "2000",
-            "step" => "1",
-            "default" => "800",
-            "unit" => 'px',
-            "type" => "range",
-            "dependency" => array(
-                   'element' => "single_blog_style",
-                   'value' => array(
-                       'bold'
-                   )
-            ),
-        ) ,
-        
-        array(
-            "name" => __("Featured Image Height", "mk_framework") ,
-            "desc" => __("Traditional & Compact style featured image height.", "mk_framework") ,
+            "desc" => __("", "mk_framework") ,
             "id" => "single_featured_image_height",
             "min" => "100",
             "max" => "1000",
             "step" => "1",
             "default" => "300",
             "unit" => 'px',
-            "type" => "range",
-            "dependency" => array(
-                   'element' => "single_blog_style",
-                   'value' => array(
-                       'compact'
-                   )
-            ),
+            "type" => "range"
         ) ,
         array(
             "name" => __("Featured Image", "mk_framework") ,

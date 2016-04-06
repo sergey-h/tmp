@@ -85,7 +85,7 @@ foreach ($cat_terms as $cat_term) {
                     'height' => 340
                 ));
                 if (has_post_thumbnail()) {
-                    $output.= '<a href="' . get_permalink() . '" class="news-tab-thumb"><img alt="' . the_title_attribute(array('echo' => false)) . '" title="' . the_title_attribute(array('echo' => false)) . '" src="' . $image_src . '" /></a>';
+                    $output.= '<a href="' . get_permalink() . '" class="news-tab-thumb"><img alt="' . get_the_title() . '" title="' . get_the_title() . '" src="' . $image_src . '" /></a>';
                 }
                 $output.= '<h3 class="the-title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h3>';
                 $output.= '<div class="the-excerpt">' . get_the_excerpt() . '</div>';

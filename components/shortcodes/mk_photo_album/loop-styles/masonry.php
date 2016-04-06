@@ -34,9 +34,6 @@
         $image_src[] = wp_get_attachment_image_src($image, 'full', true)[0];
     }
 
-    // We need to reverse the array to keep the order from admin panel
-    $image_src = array_reverse($image_src);
-    
     $json_image = json_encode( $image_src );
 
     /* Dynamic class names to be added to article tag. */
@@ -48,7 +45,7 @@
 
 <article id="<?php the_ID(); ?>" class="mk-album-item mk-album-grid-item <?php echo $column_class?> <?php echo implode(' ', $item_classes); ?>"  >
     <figure>
-        <img alt="<?php the_title_attribute(); ?>" title="<?php the_title_attribute(); ?>" class="album-cover-image" src="<?php echo $image_output_src; ?>" width="<?php echo $width; ?>" height="<?php echo $view_params['height']; ?>"  />
+        <img alt="<?php the_title(); ?>" title="<?php the_title(); ?>" class="album-cover-image" src="<?php echo $image_output_src; ?>" width="<?php echo $width; ?>" height="<?php echo $view_params['height']; ?>"  />
         <?php if( $view_params['overlay_preview'] == 'true' ): ?>
         <div class="overlay anim-<?php echo $view_params['overlay_hover_animation'] ?>"></div>
         <?php endif; ?>
@@ -73,7 +70,7 @@
         <a  href="<?php echo $image_src_array[0]; ?>" class="mk-album-link js-el"
             data-mk-component="PhotoAlbum"
             data-photoalbum-images='<?php echo $json_image ?>'
-            data-photoalbum-title="<?php the_title_attribute(); ?>"
+            data-photoalbum-title="<?php the_title(); ?>"
             data-photoalbum-id="<?php the_ID(); ?>"
             data-photoalbum-url="<?php echo $view_params['album_url']; ?>" >
         </a>

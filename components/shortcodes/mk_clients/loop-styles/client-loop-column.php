@@ -71,7 +71,7 @@ $item_counter = 0;
 		    <?php 
 		    echo !empty($url) ? '<a target="' . $view_params['target'] . '" href="' . $url . '">' : '';
 		    ?>
-		    <div title="<?php the_title_attribute(); ?>" class="client-logo" style="background-image:url(<?php echo mk_image_generator($image_src_array[0], false, false); ?>); <?php echo $view_params['height']; ?>"></div>
+		    <div title="<?php the_title(); ?>" class="client-logo" style="background-image:url(<?php echo mk_image_generator($image_src_array[0], false, false); ?>); <?php echo $view_params['height']; ?>"></div>
 		    <?php 
 		    echo !empty($url) ? '</a>' : '';
 		    ?>

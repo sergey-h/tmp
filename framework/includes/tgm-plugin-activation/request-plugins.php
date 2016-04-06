@@ -47,7 +47,7 @@ function mk_jupiter_register_required_plugins() {
             'slug' => 'js_composer_theme',
             'source' => THEME_DIR . '/plugins/js_composer_theme.zip',
             'required' => true,
-            'version' => '4.11.1',
+            'version' => '4.9.2',
             'force_activation' => false,
             'force_deactivation' => false
         ),

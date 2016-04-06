@@ -46,7 +46,7 @@ if (!function_exists('mk_similar_posts_html')) {
         while ($query->have_posts()) {
             $query->the_post();
             $output.= '<li><div class="similar-post-holder">';
-            $output.= '<a class="mk-similiar-thumbnail" href="' . get_permalink() . '" title="' . the_title_attribute(array('echo' => false)) . '">';
+            $output.= '<a class="mk-similiar-thumbnail" href="' . get_permalink() . '" title="' . get_the_title() . '">';
             if (has_post_thumbnail()) {
                 $image_src_array = wp_get_attachment_image_src(get_post_thumbnail_id() , 'full', true);
                 $image_src = bfi_thumb($image_src_array[0], array(
@@ -60,7 +60,7 @@ if (!function_exists('mk_similar_posts_html')) {
                     'height' => $height
                 ));
             }
-            $output.= '<img src="' . mk_image_generator($image_src, $width, $height) . '" alt="' . the_title_attribute(array('echo' => false)) . '" />';
+            $output.= '<img src="' . mk_image_generator($image_src, $width, $height) . '" alt="' . get_the_title() . '" />';
             $output.= '<div class="image-hover-overlay"></div></a>';
             $output.= '<a href="' . get_permalink() . '" class="mk-similiar-title">' . get_the_title() . '</a>';
             $output.= '</div></li>';

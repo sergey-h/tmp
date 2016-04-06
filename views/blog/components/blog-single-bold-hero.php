@@ -12,23 +12,9 @@ global $mk_options;
 
 if (mk_get_blog_single_style() != 'bold') return false;
 
-$hero_image_background = wp_get_attachment_image_src(get_post_thumbnail_id() , 'full')[0];
-$hero_image_background_css = (!mk_is_default_thumbnail($hero_image_background)) ? 'background-image:url('.$hero_image_background.');' : '';
-
-
+$hero_image_background = wp_get_attachment_image_src(get_post_thumbnail_id() , 'full', true)[0];
 $blog_type_theme_options = $mk_options['single_blog_style'];
-
-// Option to set hero image full height or custom
-$full_height = !empty($mk_options['single_bold_hero_full_height']) ? $mk_options['single_bold_hero_full_height'] : 'true';
-$full_height_attr = ($full_height == 'true') ? 'data-mk-component="FullHeight"' : '';
-
-// Option to set the hero image height when full height option is disabled
-$hero_custom_height = !empty($mk_options['bold_single_hero_height']) ? $mk_options['bold_single_hero_height'] : 800;
-$hero_custom_height_css = ($full_height == 'false') ? ('height:'.$hero_custom_height.'px') : '';
-
-
 $blog_type = get_post_meta($post->ID, '_single_blog_style', true);
-
 
 if ( $blog_type == '' || $blog_type == 'default' ) {
 	$blog_style = $blog_type_theme_options;
@@ -37,7 +23,7 @@ if ( $blog_type == '' || $blog_type == 'default' ) {
 }
 ?>
 
-<div class="mk-blog-hero center-y <?php echo $blog_style; ?>-style js-el" style="<?php echo $hero_image_background_css . $hero_custom_height_css; ?>" <?php echo $full_height_attr; ?>>
+<div class="mk-blog-hero <?php echo $blog_style; ?>-style js-el" style="background-image:url(<?php echo $hero_image_background; ?>)" data-mk-component="FullHeight">
 	<div class="content-holder">
 		<h1 class="the-title">
 			<?php the_title(); ?>

@@ -11,15 +11,12 @@ require_once (THEME_INCLUDES . "/bfi_thumb.php");
 $id = Mk_Static_Files::shortcode_id();
 
 $query_options = array(
-    'post_type' => $post_type,
-    'exclude_post_format' => $exclude_post_format,
+    'post_type' => 'post',
     'offset' => $offset,
     'posts' => $posts,
     'orderby' => $orderby,
     'order' => $order,
 );
-
-
 
 if(is_archive()) {
     $query_options['category_name'] = isset($wp_query->query['category_name']) ? $wp_query->query['category_name'] : '';

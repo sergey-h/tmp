@@ -67,9 +67,9 @@ function mk_similar_portfolio_html($title, $width, $height, $query) {
                 'width' => $width,
                 'height' => $height
             ));
-            $output.= '<div class="portfolio-similar-posts-image"><img src="' . mk_image_generator($image_src, $width, $height) . '" alt="' . the_title_attribute(array('echo' => false)) . '" title="' . the_title_attribute(array('echo' => false)) . '" />';
+            $output.= '<div class="portfolio-similar-posts-image"><img src="' . mk_image_generator($image_src, $width, $height) . '" alt="' . get_the_title() . '" title="' . get_the_title() . '" />';
             $output.= '<div class="image-hover-overlay"></div>';
-            $output.= '<a title="' . the_title_attribute(array('echo' => false)) . '" class="modern-post-type-icon" href="' . $permalink . '"><i class="mk-jupiter-icon-plus-circle"></i></a>';
+            $output.= '<a title="' . get_the_title() . '" class="modern-post-type-icon" href="' . $permalink . '"><i class="mk-jupiter-icon-plus-circle"></i></a>';
             $output.= '<div class="portfolio-similar-meta">';
             $output.= '<a class="the-title" href="' . get_permalink() . '">' . get_the_title() . '</a><div class="clearboth"></div>';
             $output.= '<div class="portfolio-categories">' . implode(' ', $terms_name) . '</div>';

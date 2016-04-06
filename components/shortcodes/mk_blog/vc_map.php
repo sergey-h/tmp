@@ -23,23 +23,6 @@ vc_map(array(
             "type" => "dropdown"
         ),
 
-        array(
-            "heading" => __("Blog Post Formats to Exclude", 'mk_framework'),
-            "description" => __("Using this option you may want to exclude post Formats you do not want to show in this blog feed.", 'mk_framework'),
-            "param_name" => "exclude_post_format",
-            "options" => array(
-                "image" => __('Image', "mk_framework") ,
-                "video" => __('Video', "mk_framework") ,
-                "audio" => __('Audio', "mk_framework") ,
-                "portfolio" => __('Portfolio', "mk_framework") ,
-                "twitter" => __('Twitter', "mk_framework") ,
-                "blockquote" => __('Blockquote', "mk_framework") ,
-                "instagram" => __('Instagram', "mk_framework") ,
-            ),
-            "type" => "multiselect"
-        ),
-
-             
 
         array(
             "type" => "range",

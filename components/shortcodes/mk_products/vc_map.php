@@ -43,7 +43,7 @@ vc_map(array(
                 __("Featured Products", 'mk_framework') => "featured",
                 __("Top Rated Products", 'mk_framework') => "top_rated",
                 __("Products on Sale", 'mk_framework') => "products_on_sale",
-                __("Best Selling Products", 'mk_framework') => "best_sellings"
+                __("Best Sellings Products", 'mk_framework') => "best_sellings"
             ),
             "type" => "dropdown"
         ),

@@ -2,7 +2,7 @@
 $general_section[] = array(
     "type" => "sub_group",
     "id" => "mk_options_global_settings",
-    "name" => __("General / Global Settings", "mk_framework") ,
+    "name" => __("General / Global Settings Settings", "mk_framework") ,
     "desc" => __("", "mk_framework") ,
     "fields" => array(
         array(

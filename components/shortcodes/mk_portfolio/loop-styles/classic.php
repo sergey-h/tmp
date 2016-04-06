@@ -70,7 +70,7 @@
                 $image_output_src = $image_src_array[0];
             }
         ?>
-        <div class="featured-image js-taphover">
+        <div class="featured-image">
             <img alt="<?php the_title(); ?>" title="<?php the_title(); ?>" src="<?php echo $image_output_src; ?>"  />
             <div class="image-hover-overlay"></div>
             <?php

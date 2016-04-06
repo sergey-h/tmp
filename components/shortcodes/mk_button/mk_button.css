@@ -9,16 +9,6 @@
 	font-size: 16px;
 }
 
-/* Align center buttons should have no sinlinges in row otherwise there will be zindex issue */
-.mk-button-container.text-center {
-	clear:both;
-}
-/* Full width button can not be floated */
-.mk-button-container.width-full {
-  width: 100%;
-  float: none;
-}
-
 /*Button Corner Style*/
 .mk-button--corner-pointed,
 .mk-button--corner-pointed .double-outline-inside {
@@ -327,6 +317,8 @@ input[type="text"].mk-button::-moz-focus-inner {
   .mk-button-container .mk-button {
   	float: none;
   }
+}
+@media handheld, only screen and (max-width: 767px) {
   .ls-wp-container .mk-button {
     padding: 8px 10px;
     font-size: 10px;
@@ -336,10 +328,6 @@ input[type="text"].mk-button::-moz-focus-inner {
     margin-top: -3px;
     font-size: 10px;
   }
-  .mk-button-container{
-	  width: 100%;
-	  float: none;
-	}
 }
 @media handheld, only screen and (max-width: 550px) {
   .ls-wp-container .mk-button {

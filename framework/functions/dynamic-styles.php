@@ -347,7 +347,7 @@ class Mk_Static_Files
     }
     
     /**
-     * Deletes the the mk_assets/theme_options-time.css file
+     * Stores the app_global_dynamic_styles into the mk_assets/theme_options-time.css file
      *
      * @param bool|true $minify
      */

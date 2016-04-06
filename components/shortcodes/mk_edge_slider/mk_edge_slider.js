@@ -29,9 +29,6 @@
 					};
 				});
 
-                // Set position fixed here rather than css to avoid flash of strangely styled slides befor plugin init
-                if(MK.utils.isSmoothScroll) $this.css('position', 'fixed');
-
 				setNavigationContent( 1, self.$slides.length - 1 );
 				setSkin( 0 );
 
@@ -115,22 +112,19 @@
             winH = $window.height();
             offset = $this.offset().top;
 
-            if(!MK.utils.isSmoothScroll) return; 
             if(MK.utils.isResponsiveMenuState()) {
-                // Reset our parallax layers position and styles when we're in responsive mode
                 $this.css({
-                    '-webkit-transform': 'translateZ(0)',
-                    '-moz-transform': 'translateZ(0)',
-                    '-ms-transform': 'translateZ(0)',
-                    '-o-transform': 'translateZ(0)',
-                    'transform': 'translateZ(0)',
+                    '-webkit-transform': 0,
+                    '-moz-transform': 0,
+                    '-ms-transform': 0,
+                    '-o-transform': 0,
+                    'transform': 0,
                     'position': 'absolute'
                 });
                 $opacityLayer.css({
                     'opacity': 1
                 });
             } else {
-                // or proceed with scroll logic when we assume desktop screen
                 onScroll();
             }
         };
@@ -159,17 +153,14 @@
         };
 
         onResize();
-        $window.on('load', onResize);
-        $window.on('resize', onResize);
+        $window.on('load resize', onResize);
         window.addResizeListener( $wrapper.get(0), onResize );
 
-        if(MK.utils.isSmoothScroll) {
-            onScroll();
-            $window.on('scroll', function() {
-                if(MK.utils.isResponsiveMenuState()) return;
-                window.requestAnimationFrame(onScroll);
-            });
-        }
+        onScroll();
+        $window.on('scroll', function() {
+            if(MK.utils.isResponsiveMenuState()) return;
+            window.requestAnimationFrame(onScroll);
+        });
 
 		this.el = el;
 		this.config = $.extend( config, callbacks );

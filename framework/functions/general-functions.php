@@ -24,7 +24,7 @@ if (!function_exists('mk_theme_options')) {
                                 }
                             }
                         } 
-                        else { 
+                        else {
                             if (isset($option['default'])) {
                                 $theme_options[$page['name']][$option['id']] = $option['default'];
                             }
@@ -385,8 +385,7 @@ function mk_post_nav($same_category = true, $taxonomy = 'category') {
         
         $icon = $post_image = "";
         $link = get_permalink($entry->ID);
-        /* Added image-size-150x150 image size in functions.php to have exact 150px * 150px thumbnail size */
-        $image = get_the_post_thumbnail($entry->ID, 'image-size-150x150');
+        $image = get_the_post_thumbnail($entry->ID, 'thumbnail');
         $class = $image ? "with-image" : "without-image";
         $icon = ($key == 'prev') ? '<i class="mk-icon-long-arrow-left"></i>' : '<i class="mk-icon-long-arrow-right"></i>';
         $output.= '<a class="mk-post-nav mk-post-' . $key . ' ' . $class . '" href="' . $link . '">';
@@ -688,6 +687,159 @@ function mk_get_attachment_id_from_url($attachment_url = '') {
     
     return $attachment_id;
 }
+
+/*-----------------*/
+
+/*
+ * Contact Form ajax function
+*/
+
+add_action('wp_ajax_nopriv_mk_contact_form', 'mk_contact_form');
+add_action('wp_ajax_mk_contact_form', 'mk_contact_form');
+
+function mk_contact_form() {
+
+    check_ajax_referer('mk-contact-form-security', 'security');
+
+        
+        $sitename = get_bloginfo('name');
+        
+        // try {
+        //     $siteurl = $_SERVER['HTTP_REFERER']; // Current URL
+        // } catch (Exception $e) {
+        //     $siteurl = home_url();
+        // }
+        $send_to = mk_get_contact_form_email(trim($_POST['p_id']), trim($_POST['sh_id']));
+        $firstname = isset($_POST['firstname']) ? trim($_POST['firstname']) : '';
+        $last_name = isset($_POST['last_name']) ? trim($_POST['last_name']) : '';
+        $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+        $phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
+        $company = isset($_POST['company']) ? trim($_POST['company']) : '';
+        $region = isset($_POST['region']) ? trim($_POST['region']) : '';
+        $content = isset($_POST['content']) ? trim($_POST['content']) : '';
+
+        // $content = isset($_POST['test']) ? trim($_POST['test']) : '';
+        // $content = isset($_POST['contact_test']) ? trim($_POST['contact_test']) : '';
+        
+        $error = false;
+        if ($send_to === '' || $email === '' || $content === '' || $name === '') {
+            $error = true;
+        }
+        if (!preg_match('/^[^@]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$/', $email)) {
+            $error = true;
+        }
+        if (!preg_match('/^[^@]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$/', $send_to)) {
+            $error = true;
+        }
+        
+        if ($error == false) {
+            $subject = sprintf(__('%1$s\'s message from %2$s', 'mk_framework') , $sitename, $name);
+            $body = __('Site: ', 'mk_framework') . $sitename . ' (' . $siteurl . ')' . "\n\n";
+            // $body.= __('Name: ', 'mk_framework') . $name . " " . $last_name . "\n\n";
+            // $body.= __('Email: ', 'mk_framework') . $email . "\n\n";
+            if (!empty($phone)) {
+                $body.= __('Phone Number: ', 'mk_framework') . $phone . "\n\n";
+            }
+            if (!empty($website)) {
+                $body.= __('Website: ', 'mk_framework') . $website . "\n\n";
+            }
+            foreach ($_POST as $key => $value) {
+                $keys[]=$key;
+            }
+            $body.= __('Messages: ', 'mk_framework') . $content.'____'.implode('_____', $keys).'_____'.implode('_____', $_POST);
+            $headers = "From: $name $last_name <$email>\r\n";
+            $headers.= "Reply-To: $email\r\n";
+            
+            if (wp_mail($send_to, $subject, $body, $headers)) {
+                echo 'Email sent!';
+            } 
+            else {
+                echo 'Email could not be sent!';
+            }
+        } else {
+            echo 'Error(s) occured!';
+        }
+
+         wp_die();
+
+}
+
+if (!function_exists('mk_update_contact_form_email')) {
+    function mk_update_contact_form_email($p_id, $sh_id, $email) {
+
+        $email = empty($email) ? get_bloginfo( 'admin_email' ) : $email;
+        
+        $stored_email = get_option('contact-email-'. $p_id. '-' . $sh_id);
+
+        if($stored_email != $email) {
+            update_option('contact-email-'. $p_id . '-' . $sh_id, $email);
+        }    
+    }
+}
+
+
+if (!function_exists('mk_get_contact_form_email')) {
+    function mk_get_contact_form_email($p_id, $sh_id) {
+        
+        return get_option('contact-email-'. $p_id. '-' . $sh_id);
+    }
+}
+
+
+/*
+ * Outputs some hidden inputs for contact forms to have post id and shortcode id to be sent to admin-ajax.
+*/
+if (!function_exists('mk_contact_form_hidden_values')) {
+    function mk_contact_form_hidden_values($sh_id, $p_id) {
+            $output = '<input type="hidden" id="sh_id" name="sh_id" value="'.$sh_id.'">';
+            $output .= '<input type="hidden" id="p_id" name="p_id" value="'.$p_id.'">';
+
+            return $output;
+    }
+}
+
+/*
+ * Create nonce to be used only one time.
+*/
+/*function mk_create_onetime_nonce($action = -1, $name = 'security') {
+    $time = time();
+    $nonce = wp_create_nonce($time.$action);
+    $value =  $nonce . '-' . $time;
+
+    return '<input type="hidden" name="'.$name.'" value="'.$value.'"/>';
+}*/
+
+
+
+/*
+ * Verify the Nonce and expire it.
+*/
+/*if (!function_exists('mk_verify_onetime_nonce')) {
+    function mk_verify_onetime_nonce( $_nonce, $action = -1) {
+
+        @list( $nonce, $time ) = explode( '-', $_nonce );
+    
+        // bad formatted onetime-nonce
+        if ( empty( $nonce ) || empty( $time ) )
+            return false;
+        
+        $nonce_transient = get_transient( '_nonce_' . $time );
+        
+        // nonce cannot be validated or has expired or was already used
+        if (
+            ! wp_verify_nonce( $nonce, $time . $action ) ||
+            false === $nonce_transient ||
+            'used' === $nonce_transient
+        )
+            return false;
+        
+        // mark this nonce as used
+        set_transient( '_nonce_' . $time, 'used', 60*60 );
+        
+        // return true to mark this nonce as valid
+        return true;
+    }
+}*/
 
 
 /*-----------------*/

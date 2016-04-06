@@ -11,17 +11,11 @@ function mk_woocommerce_enabled() {
     return false;
 }
 
-
-
 if (!mk_woocommerce_enabled()) {
     return false;
 }
 
 /******************/
-
-/* Added Polyfil for increment and decrement of product quality for woocommerce using a plugin */
-require_once (THEME_INCLUDES . "/woocommerce-quantity-increment/woocommerce-quantity-increment.php");
-
 
 /*
  * Declares support to woocommerce

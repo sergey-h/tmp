@@ -16,8 +16,8 @@
 			$image_src = bfi_thumb( $image_src_array[ 0 ], array('width' => $image_width, 'height' => $image_height));
 			?>
 			<div class="featured-image">
-				<a class="mk-lightbox" data-fancybox-group="portfolio-single-featured" title="<?php the_title_attribute(); ?>" href="<?php echo $image_src_array[0]; ?>">
-					<img src="<?php echo mk_image_generator($image_src, $image_width, $image_height); ?>" alt="<?php the_title_attribute(); ?>" title="<?php the_title_attribute(); ?>"  height="<?php echo $image_height; ?>" width="<?php echo $image_width; ?>" itemprop="image" />
+				<a class="mk-lightbox" data-fancybox-group="portfolio-single-featured" title="<?php the_title(); ?>" href="<?php echo $image_src_array[0]; ?>">
+					<img src="<?php echo mk_image_generator($image_src, $image_width, $image_height); ?>" alt="<?php the_title(); ?>" title="<?php the_title(); ?>"  height="<?php echo $image_height; ?>" width="<?php echo $image_width; ?>" itemprop="image" />
 				</a>
 			</div>
 			<?php 	

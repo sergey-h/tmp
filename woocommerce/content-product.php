@@ -26,9 +26,9 @@ if ( empty( $woocommerce_loop['loop'] ) ){
 }
 
 // Store column count for displaying the grid
-/*if ( empty( $woocommerce_loop['columns'] ) ){
+if ( empty( $woocommerce_loop['columns'] ) ){
 	$woocommerce_loop['columns'] = apply_filters( 'loop_shop_columns', 4 );
-}*/
+}
 
 // Ensure visibility
 if ( ! $product->is_visible() ){
@@ -47,47 +47,14 @@ $quality = $mk_options['woo_image_quality'];
 // Sets the shop loop columns from theme options.
 if(is_shop()) {
 	$layout = get_post_meta( global_get_post_id(), '_layout', true );
-	if (isset($_REQUEST['layout']) && !empty($_REQUEST['layout'])) {
-        $layout = esc_html($_REQUEST['layout']);
-    }
-	$columns = isset($mk_options['shop_archive_columns']) && $mk_options['shop_archive_columns'] != 'default' ? $mk_options['shop_archive_columns'] : false;
-
-	if($columns) {
-
-		switch ($columns) {
-			case 1:
-				$grid = 'mk--col--12-12';
-				break;
-			case 2:
-				$grid = 'mk--col--1-2';
-				break;
-			case 3:
-				$grid = 'mk--col--4-12';
-				break;
-			case 4:
-				$grid = 'mk--col--3-12';
-				break;			
-			default:
-				$grid = 'mk--col--3-12';
-				break;
-		}
-
-		// Custom columns taken from theme options > woocommerce > Shop Loop columns option.
-		$classes[] = 'item mk--col '.$grid;
-		$width = round($grid_width/$columns) - 28;
-		$column_width = round($grid_width/$columns);
-
+	if($layout == 'full') {
+		$classes[] = 'item mk--col mk--col--3-12';
+		$width = round($grid_width/4) - 28;
+		$column_width = round($grid_width/4);
 	} else {
-		//Default columns
-		if($layout == 'full') {
-			$classes[] = 'item mk--col mk--col--3-12';
-			$width = round($grid_width/4) - 28;
-			$column_width = round($grid_width/4);
-		} else {
-			$classes[] = 'item mk--col mk--col--4-12';
-			$width = round((($content_width / 100) * $grid_width)/3) - 31;
-			$column_width = round($grid_width/3);
-		}
+		$classes[] = 'item mk--col mk--col--4-12';
+		$width = round((($content_width / 100) * $grid_width)/3) - 31;
+		$column_width = round($grid_width/3);
 	}
 } else {
 	switch ($woocommerce_loop['columns']) {
@@ -153,7 +120,7 @@ if ( has_post_thumbnail() ) {
         $image_output_src = $image_src_array[0];
 	}
 
-	echo '<img src="'.$image_output_src.'" class="product-loop-image" alt="'.the_title_attribute(array('echo' => false)).'" title="'.the_title_attribute(array('echo' => false)).'" itemprop="image" />';	
+	echo '<img src="'.$image_output_src.'" class="product-loop-image" alt="'.get_the_title().'" title="'.get_the_title().'" itemprop="image" />';	
 	
 	echo '<span class="product-loading-icon added-cart"></span>';
 
@@ -172,7 +139,7 @@ if ( has_post_thumbnail() ) {
         $image_hover_src = $image_src_hover_array[0];
 	}
 		
-		echo '<img src="'.$image_hover_src.'" alt="'.the_title_attribute(array('echo' => false)).'" class="product-hover-image" title="'.the_title_attribute(array('echo' => false)).'">';
+		echo '<img src="'.$image_hover_src.'" alt="'.get_the_title().'" class="product-hover-image" title="'.get_the_title().'">';
 
 
 	}

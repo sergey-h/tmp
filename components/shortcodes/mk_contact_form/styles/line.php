@@ -64,7 +64,7 @@ if($view_params['captcha'] == 'true') { ?>
     <div class="mk-form-row">
         <div class="mk-form-full s_form-all">
 
-            <input type="text" name="captcha" class="captcha-form text-input s_txt-input full" data-placeholder=" " required="required" autocomplete="off" tabindex="<?php echo $view_params['id']++; ?>" />
+            <input type="text" name="captcha" class="captcha-form text-input s_txt-input full" required="required" autocomplete="off" tabindex="<?php echo $view_params['id']++; ?>" />
             <label class="ls-text-label"><span class="ls-text-label--content"><?php _e( 'Enter Captcha', 'mk_framework' ); ?></span></label>
                 <span class="captcha-image-holder"></span>
                 <span class="captcha-change-image-box"><a href="#" class="captcha-change-image"><?php _e( 'Not readable? Change text.', 'mk_framework' ); ?></a></span>

@@ -127,13 +127,7 @@ vc_map(array(
             "max" => "1500",
             "step" => "1",
             "unit" => 'px',
-            "description" => __("", "mk_framework"),
-            "dependency" => array(
-                'element' => "fullwidth",
-                'value' => array(
-                    'false',
-                )
-            )
+            "description" => __("", "mk_framework")
         ) ,
         array(
             "type" => "textfield",

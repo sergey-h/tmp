@@ -37,8 +37,8 @@ $output = '<article id="' . get_the_ID('Y-m-d') . '" class="mk-blog-magazine-ite
 
 if (has_post_thumbnail()) {
     
-    $output.= '<div class="featured-image"><a title="' . the_title_attribute(array('echo' => false)) . '" href="' . get_permalink() . '">';
-    $output.= '  <img alt="' . the_title_attribute(array('echo' => false)) . '" title="' . the_title_attribute(array('echo' => false)) . '" src="' . mk_image_generator($image_output_src, $image_width, $image_height) . '" itemprop="image" />';
+    $output.= '<div class="featured-image"><a title="' . get_the_title() . '" href="' . get_permalink() . '">';
+    $output.= '  <img alt="' . get_the_title() . '" title="' . get_the_title() . '" src="' . mk_image_generator($image_output_src, $image_width, $image_height) . '" itemprop="image" />';
     $output.= '  <div class="image-gradient-overlay"></div>';
     $output.= '</a></div>';
 }

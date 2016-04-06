@@ -201,24 +201,6 @@ function mk_vc_mapper() {
         }
 
     }
-
-
-
-    // For custom post types added in child theme
-    $external_shortcodes_dir = get_stylesheet_directory() . '/components/shortcodes/*/vc_map.php';
-
-    $external_shortcodes = glob($external_shortcodes_dir);
-    
-    foreach ($external_shortcodes as $shortcode) {
-
-        $shortcode_name = array_reverse(explode('/', $shortcode));
-        $shortcode_name = $shortcode_name[1];
-        
-        include_once(get_stylesheet_directory() . '/components/shortcodes/'.$shortcode_name.'/vc_map.php');
-
-    }
-
-
 }
 add_action('vc_mapper_init_before', 'mk_vc_mapper');
 
@@ -227,7 +209,7 @@ Sets Visual Composer as a theme
 */
 add_action('vc_before_init', 'mk_set_vc_as_theme');
 function mk_set_vc_as_theme() {
-    vc_set_as_theme();
+    vc_set_as_theme(true);
 
     
     if (defined('MODIFIED_VC_ACTIVATED')) {

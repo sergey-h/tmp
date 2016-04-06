@@ -37,7 +37,6 @@ if (!class_exists('Mk_Options_Framework_Fields_Range')) {
             $this->step = isset($value['step']) ? ('data-step="' . $value['step'] . '" ') : '';
             $this->unit = $value['unit'];
             $this->description = isset($value['desc']) ? $value['desc'] : '';
-            $this->dependency = isset($value['dependency']) ? $value['dependency'] : '';
         }
         
         public function render() {
@@ -50,7 +49,7 @@ if (!class_exists('Mk_Options_Framework_Fields_Range')) {
             }
             $output.= '</div>';
             
-            return parent::field_wrapper($this->id, $this->name, $this->description, $output, parent::dependency_builder($this->dependency));
+            return parent::field_wrapper($this->id, $this->name, $this->description, $output);
         }
         
         /**

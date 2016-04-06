@@ -68,9 +68,9 @@ $page_permalink = get_permalink();
 
                     <?php if ($share_button == "true") { ?>
                     <ul class="mk-tab-slider-share">
-                        <li><a class="facebook-share" data-title="<?php echo esc_attr($title); ?>" data-url="<?php echo $page_permalink; ?>" href="#"><i class="mk-icon-facebook"></i></a></li>
-                        <li><a class="twitter-share" data-title="<?php echo esc_attr($title); ?>" data-url="<?php echo $page_permalink; ?>" href="#"><i class="mk-moon-twitter"></i></a></li>
-                        <li><a class="googleplus-share" data-title="<?php echo esc_attr($title); ?>" data-url="<?php echo $page_permalink; ?>" href="#"><i class="mk-icon-google-plus"></i></a></li>
+                        <li><a class="facebook-share" data-title="<?php echo $title; ?>" data-url="<?php echo $page_permalink; ?>" href="#"><i class="mk-icon-facebook"></i></a></li>
+                        <li><a class="twitter-share" data-title="<?php echo $title; ?>" data-url="<?php echo $page_permalink; ?>" href="#"><i class="mk-moon-twitter"></i></a></li>
+                        <li><a class="googleplus-share" data-title="<?php echo $title; ?>" data-url="<?php echo $page_permalink; ?>" href="#"><i class="mk-icon-google-plus"></i></a></li>
                     </ul>
                     <?php } ?>
 

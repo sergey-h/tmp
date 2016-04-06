@@ -90,8 +90,6 @@ class mk_artbees_products
         $result = $this->verify_artbees_apikey(get_option('artbees_api_key', ''));
         
         if(defined('MK_DEV')) return true;
-
-        if(self::isLocalHost()) return true;
         
         return ($result['status'] == 202 ? true : false);
     }
@@ -353,12 +351,12 @@ class mk_artbees_products
                 }
             }
     public static function isLocalHost() {
-        return ( $_SERVER['REMOTE_ADDR'] === '127.0.0.1' || $_SERVER['REMOTE_ADDR'] === 'localhost' || $_SERVER['REMOTE_ADDR'] === '::1') ? 1 : 0;
-    }
+                return ( $_SERVER['REMOTE_ADDR'] === '127.0.0.1' || $_SERVER['REMOTE_ADDR'] === 'localhost' || $_SERVER['REMOTE_ADDR'] === '::1') ? 1 : 0;
+            }
 
-    public static function isWpDebug() {
-        return ( defined( 'WP_DEBUG' ) && WP_DEBUG == true );
-    }        
+            public static function isWpDebug() {
+                return ( defined( 'WP_DEBUG' ) && WP_DEBUG == true );
+            }        
     
     public static function compileSystemStatus($json_output = false, $remote_checks = false) {
         global $wpdb;

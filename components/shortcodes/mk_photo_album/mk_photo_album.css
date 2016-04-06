@@ -22,10 +22,6 @@
 /**
  * General Photo Album Style
  * ==================================================================================*/
- .mk-photo-album{
-    direction: ltr;
-    text-align: center;
- }
 .mk-photo-album .mk-album-item {
   position: relative;
   overflow: hidden;
@@ -286,7 +282,6 @@
   padding: 0;
   position: relative;
   z-index: 2;
-  text-align: center;
 }
 .mk-photo-album .item-meta .the-title {
   margin-bottom: 10px;
@@ -451,7 +446,6 @@
   z-index: 9999;
   opacity: 0;
   transition: opacity .2s;
-  direction: ltr;
 }
 .slick-slider-wrapper.is-active {
   opacity: 1;

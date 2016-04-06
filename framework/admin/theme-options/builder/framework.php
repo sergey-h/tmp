@@ -301,8 +301,8 @@ class Mk_Options_Framework
         }
     }
     
-    public function field_wrapper($id, $name, $desc, $option_output, $dependency = false) {
-        $output = '<div class="mk-single-option" id="' . $id . '_wrapper"'.$dependency.'>';
+    public function field_wrapper($id, $name, $desc, $option_output) {
+        $output = '<div class="mk-single-option" id="' . $id . '_wrapper">';
         
         $output.= '<label for="' . $id . '"><span>' . $name . '</label>';
         

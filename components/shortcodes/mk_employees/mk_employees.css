@@ -176,7 +176,6 @@
 .mk-employeee-networks i {
   font-size: 16px;
   color: #aaaaaa;
-  vertical-align: middle;
 }
 .mk-employeee-networks a:hover i {
   transition: all 0.2s;

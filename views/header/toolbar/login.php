@@ -16,7 +16,8 @@ global $wp, $mk_options;
 
 		$current_url = home_url($wp->request);
 		if (is_user_logged_in()) {
-			$current_user = wp_get_current_user();
+			global $current_user;
+			get_currentuserinfo();
 			?>
 			<div class="mk-header-login">
     		<a href="#" id="mk-header-login-button" class="mk-login-link mk-toggle-trigger"><i class="mk-moon-user-8"></i><?php echo $current_user->display_name;?></a>

@@ -50,8 +50,7 @@ if ($post_id) {
 if (is_archive()) {
     $title = $mk_options['archive_page_title'];
     if (is_category()) {
-        $title = single_cat_title('', false);
-        $subtitle = strip_tags(category_description());
+        $subtitle = sprintf(__('Category Archive for: "%s"', 'mk_framework'), single_cat_title('', false));
     } elseif (is_tag()) {
         $subtitle = sprintf(__('Tag Archives for: "%s"', 'mk_framework'), single_tag_title('', false));
     } elseif (is_day()) {
@@ -68,17 +67,11 @@ if (is_archive()) {
         }
         $subtitle = sprintf(__('Author Archive for: "%s"'), $curauth->nickname);
     } elseif (is_tax()) {
-        $term  = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'));
-        $title = $term->name;
-        $subtitle = strip_tags($term->description);
+        $term     = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'));
+        $subtitle = sprintf(__('Archives for: "%s"', 'mk_framework'), $term->name);
     }
     if ($mk_options['archive_disable_subtitle'] == 'false') {
         $subtitle = '';
-    }
-
-    // Will add the custom post type archive title in archive loop.
-    if(get_post_type() != 'post') {
-        $title = post_type_archive_title('', false);
     }
 }
 

@@ -7,7 +7,7 @@
 				<img src="<?php echo $view_params['thumb_image']; ?>" class="product-loop-image" alt="<?php echo $view_params['thumb_title']; ?>" title="<?php echo $view_params['thumb_title']; ?>" itemprop="image">
 				<span class="product-loading-icon added-cart"></span>
 				<?php if(!empty($view_params['thumb_hover_image'])) { ?>
-					<img src="<?php echo $view_params['thumb_hover_image']; ?>" alt="<?php echo esc_attr($view_params['thumb_title']); ?>" class="product-hover-image" title="<?php echo esc_attr($view_params['thumb_title']); ?>" > 
+					<img src="<?php echo $view_params['thumb_hover_image']; ?>" alt="<?php echo $view_params['thumb_title']; ?>" class="product-hover-image" title="<?php echo $view_params['thumb_title']; ?>" > 
 				<?php } ?>
 			</a>
 			
@@ -17,7 +17,7 @@
 			
 			<?php if($view_params['show_quickview'] == 'true') : ?>
 			<div class="quick-view-container">
-				<a data-id="<?php the_ID(); ?>" data-action="mk_woocommerce_quick_view" href="#" class="quick-view-button js-ajax-modal"><i class="mk-moon-search-3"></i><span><?php _e('Quick View', 'mk_framework'); ?></span></a>
+				<a data-id="<?php the_ID(); ?>" data-action="mk_woocommerce_quick_view" href="#" class="quick-view-button js-ajax-modal"><i class="mk-moon-search-3"></i><span>Quick View</span></a>
 			</div>
 			<?php endif; ?>
 		</div>

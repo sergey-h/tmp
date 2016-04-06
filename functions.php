@@ -21,7 +21,6 @@ class Theme
 
     function init($options) {
         $this->constants($options);
-        $this->post_types();
         $this->functions();
         $this->helpers();
         $this->admin();
@@ -33,6 +32,9 @@ class Theme
         
         add_action('init', array(&$this,
             'language'
+        ));
+        add_action('init', array(&$this,
+            'post_types'
         ));
         
         add_action('init', array(&$this,
@@ -81,7 +83,6 @@ class Theme
         define("THEME_COMPONENTS", THEME_DIR_URI . "/components");
         define("THEME_ACTIONS", THEME_FRAMEWORK . "/actions");
         define("THEME_INCLUDES", THEME_FRAMEWORK . "/includes");
-        define("THEME_INCLUDES_URI", THEME_DIR_URI . "/framework/includes");
         define("THEME_WIDGETS", THEME_FRAMEWORK . "/widgets");
         define("THEME_HELPERS", THEME_FRAMEWORK . "/helpers");
         define("THEME_FUNCTIONS", THEME_FRAMEWORK . "/functions");
@@ -144,9 +145,6 @@ class Theme
         
         add_theme_support('yoast-seo-breadcrumbs');
         
-        add_image_size('image-size-150x150', 150, 150, true);
-        add_image_size('image-size-550x550', 550, 550, true);
-
         add_image_size('photo-album-thumbnail-small', 150, 100, true);
         add_image_size('photo-album-thumbnail-square', 500, 500, true);
         
@@ -217,7 +215,6 @@ class Theme
         require_once (THEME_HELPERS . "/schema-markup.php");
         require_once (THEME_HELPERS . "/wp_query.php");
         require_once (THEME_HELPERS . "/main-nav-walker.php");
-        require_once (THEME_HELPERS . "/send-email.php");
     }
     
     function add_metaboxes() {
@@ -266,7 +263,7 @@ class Theme
     }
     
     function admin_menus() {
-        $theme_options_menu_text = '<span class="menu-theme-options"><span class="dashicons-before dashicons-admin-generic"></span>'.__('Theme Options', 'mk_framework').'</span>';
+        $theme_options_menu_text = '<span class="menu-theme-options"><span class="dashicons-before dashicons-admin-generic"></span>Theme Options</span>';
         add_menu_page(THEME_NAME, THEME_NAME, 'edit_posts', THEME_NAME, array(&$this,
             'theme_register'
         ) , 'dashicons-star-filled', 3);

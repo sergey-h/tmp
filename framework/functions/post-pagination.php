@@ -12,7 +12,7 @@ if (!defined('THEME_FRAMEWORK')) exit('No direct script access allowed');
  */
 
 if (!function_exists('mk_theme_blog_pagenavi')) {
-    function mk_post_pagination($blog_query) {
+    function mk_post_pagination($blog_query, $paged) {
         global $wpdb, $wp_query, $paged;
         
         $pagenavi_options = array(
@@ -75,12 +75,9 @@ if (!function_exists('mk_theme_blog_pagenavi')) {
             $pages_text = str_replace("%TOTAL_PAGES%", number_format_i18n($max_page) , $pages_text);
             
             echo '<div class="mk-pagination mk-grid">' . "\n";
-            $previous_page_link = get_previous_posts_link('');  
-            if($previous_page_link) {
-                echo '<div class="mk-pagination-previous">';
-                echo $previous_page_link;
-                echo '</div>';
-            }
+            echo '<div class="mk-pagination-previous">';
+            previous_posts_link('');
+            echo '</div>';
             echo '<div class="mk-pagination-inner">';
             if (!empty($pages_text)) {
                 echo '<span class="pages">' . $pages_text . '</span>';
@@ -116,12 +113,9 @@ if (!function_exists('mk_theme_blog_pagenavi')) {
             }
             
             echo '</div>';
-            $next_page_link = get_next_posts_link('', $max_page);    
-            if($next_page_link) {
-                echo '<div class="mk-pagination-next">';
-                echo $next_page_link;
-                echo '</div>';
-            }
+            echo '<div class="mk-pagination-next">';
+            next_posts_link('', $max_page);
+            echo '</div>';
             echo '<div class="mk-total-pages">' . __('page', 'mk_framework') . '&nbsp;&nbsp;' . $current_page_text . '&nbsp;&nbsp;' . __('of', 'mk_framework') . '&nbsp;&nbsp;' . $max_page . '</div>';
             echo '</div>';
         }

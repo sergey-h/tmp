@@ -20,7 +20,6 @@ global $mk_options;
 	/* Displays page-links for paginated posts (i.e. includes the <!--nextpage--> Quicktag one or more times) */
 	wp_link_pages('before=<div class="mk-page-links">'.__('Pages:', 'mk_framework').'&after=</div>'); 
 ?>
-
 <?php if($mk_options['diable_single_tags'] == 'true' && get_post_meta( $post->ID, '_disable_tags', true ) != 'false') : ?>
 		<div class="single-post-tags">
 			<?php 

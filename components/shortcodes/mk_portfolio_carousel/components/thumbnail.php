@@ -12,4 +12,4 @@ else {
 }
 ?>
 
-<img width="<?php echo $view_params['width']; ?>" height="<?php echo $view_params['height']; ?>" src="<?php echo $image_output_src; ?>" alt="<?php the_title_attribute(); ?>" title="<?php the_title_attribute(); ?>"  class="item-featured-image" />
+<img width="<?php echo $view_params['width']; ?>" height="<?php echo $view_params['height']; ?>" src="<?php echo $image_output_src; ?>" alt="<?php echo the_title(); ?>" title="<?php the_title(); ?>"  class="item-featured-image" />

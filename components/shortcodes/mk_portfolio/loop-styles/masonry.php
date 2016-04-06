@@ -64,9 +64,9 @@
 
 <article id="<?php the_ID(); ?>" class="mk-portfolio-item portfolio-item-<?php echo $id; ?> mk-portfolio-masonry-item <?php echo implode(' ', $item_classes); ?>">
     <div class="item-holder">
-           <div class="featured-image js-taphover <?php if($view_params['permalink_icon'] == 'false' && $view_params['zoom_icon'] == 'false') echo 'buttons-disabled'; ?>">
+           <div class="featured-image <?php if($view_params['permalink_icon'] == 'false' && $view_params['zoom_icon'] == 'false') echo 'buttons-disabled'; ?>">
         
-                <img alt="<?php the_title_attribute(); ?>" title="<?php the_title_attribute(); ?>" src="<?php echo mk_image_generator($image_src, $width, $height, 'false'); ?>" width="<?php echo $width; ?>" height="<?php echo $height; ?>"/>
+                <img alt="<?php the_title(); ?>" title="<?php the_title(); ?>" src="<?php echo mk_image_generator($image_src, $width, $height, 'false'); ?>" width="<?php echo $width; ?>" height="<?php echo $height; ?>"/>
                 
                     <?php echo mk_get_shortcode_view('mk_portfolio', 'components/hover-overlay', true, ['hover_scenarios' => $view_params['hover_scenarios']]); ?>
 

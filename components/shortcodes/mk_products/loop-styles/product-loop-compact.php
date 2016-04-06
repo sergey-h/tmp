@@ -8,13 +8,17 @@
 				<img src="<?php echo $view_params['thumb_image']; ?>" class="product-loop-image" alt="<?php echo $view_params['thumb_title']; ?>" title="<?php echo $view_params['thumb_title']; ?>" itemprop="image">
 				<span class="product-loading-icon added-cart"></span>
 				<?php if(!empty($view_params['thumb_hover_image'])) { ?>
-					<img src="<?php echo $view_params['thumb_hover_image']; ?>" alt="<?php echo esc_attr($view_params['thumb_title']); ?>" class="product-hover-image" title="<?php echo esc_attr($view_params['thumb_title']); ?>" >
+					<img src="<?php echo $view_params['thumb_hover_image']; ?>" alt="<?php echo $view_params['thumb_title']; ?>" class="product-hover-image" title="<?php echo $view_params['thumb_title']; ?>" >
 				<?php } ?>	
 			</a>
 			<div class="product-item-footer">
 				<span class="product-item-rating">
 					<?php echo $view_params['product_rating']; ?>
 				</span>
+				<!--<a href="<?php echo $view_params['product_add_link']; ?>" data-product_id="<?php echo $view_params['product_id']; ?>" rel="nofollow" class="add_to_cart_button product_type_<?php echo $view_params['product_type']; ?>">
+					<i class="<?php echo $view_params['product_add_icon']; ?>"></i>
+					<?php echo $view_params['product_add_label']; ?>
+				</a>-->
 
 				<?php 
 					global $product;

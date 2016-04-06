@@ -33,7 +33,7 @@ class Artbees_Widget_Contact_Info extends WP_Widget {
 			<?php if ( !empty( $phone ) ):?><li><i class="mk-icon-phone"></i><span><?php echo $phone;?></span></li><?php endif;?>
 			<?php if ( !empty( $fax ) ):?><li><i class="mk-icon-print"></i><span><?php echo $fax;?></span></li><?php endif;?>
 			<?php if ( !empty( $email ) ):?><li><i class="mk-icon-envelope"></i><span><a itemprop="email" href="mailto:<?php echo antispambot($email); ?>"><?php echo antispambot($email);?></a></span></li><?php endif;?>
-			<?php if ( !empty( $website ) ):?><li><i class="mk-icon-globe"></i><span><a href="<?php echo $website; ?>" itemprop="url"><?php echo $website; ?></a></span></li><?php endif;?>
+			<?php if ( !empty( $website ) ):?><li><i class="mk-icon-globe"></i><span><a href="<?php echo $website; ?>" itemprop="url"><?php echo str_replace('http://', '', $website); ?></a></span></li><?php endif;?>
 			<?php if ( !empty( $skype ) ):?><li><i class="mk-moon-skype"></i><span><a href="skype:<?php echo $skype; ?>?call"><?php echo $skype;?></a></span></li><?php endif;?>
 			</ul>
 		<?php
@@ -84,7 +84,7 @@ class Artbees_Widget_Contact_Info extends WP_Widget {
 		<input class="widefat" id="<?php echo $this->get_field_id( 'address' ); ?>" name="<?php echo $this->get_field_name( 'address' ); ?>" type="text" value="<?php echo $address; ?>" />
 		<em>You can use HTML content in this field (e.g. for line breaks use &lt;br/&gt;)</em>
 		</p>
-
+		
 		<p><label for="<?php echo $this->get_field_id( 'phone' ); ?>"><?php _e('Phone:', 'mk_framework'); ?></label>
 		<input class="widefat" id="<?php echo $this->get_field_id( 'phone' ); ?>" name="<?php echo $this->get_field_name( 'phone' ); ?>" type="text" value="<?php echo $phone; ?>" /></p>
 

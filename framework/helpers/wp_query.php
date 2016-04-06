@@ -46,18 +46,6 @@ if (!function_exists('mk_wp_query')) {
                 )
             );
         }
-
-
-        // Adds exclude option for blog loops post format
-        if(!empty($exclude_post_format)) {
-            $query['meta_query'] = array(
-                array(
-                    'key' => '_single_post_type',
-                    'value' => explode(',',$exclude_post_format),
-                    'compare' => 'NOT IN'
-                ) ,
-            );
-        }
         
         if (isset($author) && !empty($author)) {
             $query['author'] = $author;
@@ -105,10 +93,6 @@ if (!function_exists('mk_wp_query')) {
 
         if (isset($day) && !empty($day)) {
             $query['day'] = $day;
-        }
-
-        if (isset($tag) && !empty($tag)) {
-            $query['tag'] = $tag;
         }
 
         if(isset($paged) && !empty($paged)) {
